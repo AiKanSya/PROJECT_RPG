@@ -12,17 +12,6 @@
 </details>
 
 <details>
-  <summary>DIFFUSION</summary>
-
-| ORGANISME / SIGLE / NOM | NBR DE COPIES | OBSERVATIONS |
-| ----------------------- | ------------- | ------------ |
-|                         |               |              |
-|                         |               |              |
-|                         |               |              |
-
-</details>
-
-<details>
   <summary>MODIFICATIONS</summary>
 
 | N° VERSION | N° REVISION | DATE       | OBSERVATIONS PAGES MODIFIEES | AUTEUR   | REF. |
@@ -41,8 +30,7 @@
 
 - 02 - BDD
 
-  - [BDD](./02_BDD/01_BDD.md)
-  - [RACE](./)
+  - [CREATION BDD](./02_BDD/01_BDD/01_CREATION_BDD.md)
 
 - 03 - ODATA
 
