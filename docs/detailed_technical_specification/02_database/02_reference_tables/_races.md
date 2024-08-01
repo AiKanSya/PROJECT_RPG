@@ -6,18 +6,18 @@
 CREATE TABLE races (
     id_race INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
-    description TEXT,
-    size_category VARCHAR(10),
-    min_height INT,
-    max_height INT,
-    min_weight INT,
-    max_weight INT,
-    min_age INT,
+    min_height INT NOT NULL,
+    max_height INT NOT NULL,
+    min_weight INT NOT NULL,
+    max_weight INT NOT NULL,
+    base_speed DECIMAL(5, 2) NOT NULL,
+    min_age INT NOT NULL,
     max_age INT,
-    lifespan VARCHAR(50),
-    speed DECIMAL(5,2),
-    languages TEXT,
-    racial_types TEXT
+    life_expectancy INT,
+    is_playable BOOLEAN NOT NULL,
+    category_size VARCHAR(50) NOT NULL,
+    gender_type VARCHAR(50) NOT NULL,
+    description TEXT
 );
 ```
 
@@ -25,43 +25,26 @@ CREATE TABLE races (
 
 ```sql
 -- Insertion des races
-INSERT INTO races (name, description, size_category, min_height, max_height, min_weight, max_weight, min_age, max_age, lifespan, speed, languages, racial_types) VALUES
+INSERT INTO races (name, min_height, max_height, min_weight, max_weight, base_speed, min_age, max_age, life_expectancy, is_playable, category_size, gender_type)
+VALUES
+    ('Dhampire', 160, 190, 60, 90, 9.0, 12, NULL, NULL, TRUE, 'M', 'Male/Female'),
+    ('Drakéide', 180, 210, 110, 150, 9.0, 15, 100, 120, TRUE, 'M', 'Male/Female'),
+    ('Elfe', 150, 180, 50, 80, 9.0, 100, 600, 750, TRUE, 'M', 'Male/Female'),
+    ('Elfe noir', 150, 180, 50, 80, 9.0, 100, 600, 750, TRUE, 'M', 'Male/Female'),
+    ('Forgelier', 190, 220, 150, 190, 9.0, 2, NULL, NULL, TRUE, 'G', 'Asexué'),
+    ('Golgaut', 220, 250, 150, 180, 9.0, 16, 60, 80, TRUE, 'G', 'Male'),
+    ('Humain', 160, 190, 50, 90, 9.0, 16, 50, 60, TRUE, 'M', 'Male/Female'),
+    ('Kamael', 160, 190, 50, 80, 9.0, 16, 60, 80, TRUE, 'M', 'Male/Female'),
+    ('Kijin', 160, 190, 50, 80, 9.0, 20, 800, 1000, TRUE, 'M', 'Male/Female'),
+    ('Kroot', 180, 210, 90, 125, 9.0, 16, 60, 75, TRUE, 'M', 'Asexué'),
+    ('Kumiho', 160, 190, 50, 90, 9.0, 16, 800, 1000, TRUE, 'M', 'Female'),
+    ('Lyn', 150, 180, 60, 80, 9.0, 40, 300, 350, TRUE, 'M', 'Male/Female'),
+    ('Nain', 120, 150, 50, 90, 9.0, 50, 300, 350, TRUE, 'M', 'Male/Female'),
+    ('Ork', 180, 210, 90, 125, 9.0, 16, 60, 75, TRUE, 'M', 'Male/Female'),
+    ('Qunari', 200, 230, 100, 140, 9.0, 30, 60, 75, TRUE, 'G', 'Male'),
+    ('Skitarii', 160, 190, 50, 90, 9.0, 16, 50, 60, TRUE, 'M', 'Male/Female'),
+    ('Succube', 170, 200, 70, 110, 9.0, 16, 90, 100, TRUE, 'M', 'Female'),
+    ('Thériantrope', 160, 200, 50, 90, 9.0, 16, 60, 75, TRUE, 'M', 'Male/Female'),
+    ('Lamia', 160, 190, 50, 90, 9.0, 16, 60, 75, TRUE, 'M', 'Female');
 
-('Dhampire', 'Race vampirique avec une longévité immortelle.', 'TP', 160, 190, 60, 90, 12, NULL, 'immortel', 1.5 * 3, 'Commun & Vieux vampirean', 'Humanoïde & Maudit'),
-
-('Drakéide', 'Race draconique avec une force exceptionnelle.', 'TG', 180, 210, 110, 150, 15, 100, 120, 1.5 * 4, 'Commun & Sang-Dragon', 'Humanoïde & Dragon'),
-
-('Elfe', 'Race ancienne avec une grande longévité.', 'M', 150, 180, 50, 80, 100, 600, 750, 1.5 * 3, 'Commun & Eldar', 'Humanoïde & Solarii'),
-
-('Elfe noir', 'Race d’elfe avec une affinité pour la magie noire.', 'M', 150, 180, 50, 80, 100, 600, 750, 1.5 * 3, 'Commun & Eldar', 'Humanoïde & Lunarii'),
-
-('Forgelier', 'Race artificielle créée pour des fins spécifiques.', 'G', 190, 220, 150, 190, 2, NULL, NULL, 1.5 * 3, 'Commun & Synthétique', 'Humanoïde & Artificiel'),
-
-('Golgaut', 'Race géante avec une stature imposante.', 'Gig', 220, 250, 150, 180, 16, 60, 80, 1.5 * 3, 'Commun & Géant', 'Humanoïde & Géant'),
-
-('Humain', 'Race adaptable et commune.', 'M', 160, 190, 50, 90, 16, 50, 60, 1.5 * 3, 'Commun', 'Humanoïde'),
-
-('Kamael', 'Race avec des caractéristiques volantes.', 'M', 160, 190, 50, 80, 16, 60, 80, 1.5 * 3, 'Commun & Volans', 'Humanoïde & Volans'),
-
-('Kijin', 'Race démoniaque avec des pouvoirs tempétueux.', 'M', 160, 190, 60, 90, 16, 800, 1000, 1.5 * 3, 'Commun & Tempestas', 'Humanoïde & Tempestas'),
-
-('Kroot', 'Race avec une nature abérante.', 'M', 180, 210, 90, 125, 16, 60, 75, 1.5 * 3, 'Commun & Kroot', 'Humanoïde & Aberration'),
-
-('Kumiho', 'Race spectrale avec des traits mystiques.', 'M', 160, 190, 50, 90, 16, 800, 1000, 1.5 * 3, 'Commun & Spectral', 'Humanoïde & Spectral'),
-
-('Lamia', 'Race avec des traits mystérieux et mystiques.', 'M', 160, 190, 50, 90, 16, 60, 75, 1.5 * 3, 'Commun & Spectral', 'Humanoïde & Spectral'),
-
-('Lyn', 'Race agile et adaptable.', 'M', 150, 180, 60, 80, 40, 300, 350, 1.5 * 3, 'Commun', 'Humanoïde'),
-
-('Nain', 'Race robuste avec une constitution solide.', 'TP', 120, 150, 50, 90, 50, 300, 350, 1.5 * 3, 'Commun & Nanique', 'Humanoïde'),
-
-('Ork', 'Race brutale avec une forte constitution.', 'M', 180, 210, 90, 125, 16, 60, 75, 1.5 * 3, 'Commun & Ork', 'Humanoïde'),
-
-('Qunari', 'Race imposante avec des capacités magiques et martiales.', 'G', 220, 250, 150, 200, 16, 60, 75, 1.5 * 3, 'Commun & Abyssal', 'Humanoïde & Abyssal'),
-
-('Skitarii', 'Race cybernétique avec des aptitudes uniques.', 'G', 180, 210, 90, 125, 16, 60, 80, 1.5 * 3, 'Commun & Synthétique', 'Humanoïde & Synthétique'),
-
-('Succube', 'Race démoniaque avec des pouvoirs infernaux.', 'M', 170, 200, 70, 110, 16, 90, 100, 1.5 * 3, 'Commun & Infernal', 'Humanoïde & Infernal'),
-
-('Thériantrope', 'Race avec des traits bestiaux et mystiques.', 'M', 160, 190, 60, 90, 16, 60, 75, 1.5 * 3, 'Commun & Thériantrope', 'Humanoïde & Bête'),
 ```

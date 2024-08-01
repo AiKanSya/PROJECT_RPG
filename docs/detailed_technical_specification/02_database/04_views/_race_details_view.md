@@ -15,6 +15,7 @@ SELECT
     r.min_age AS min_age,
     r.max_age AS max_age,
     r.life_expectancy AS life_expectancy,
+    r.is_playable AS is_playable,
     GROUP_CONCAT(DISTINCT l.language_name ORDER BY l.language_name ASC SEPARATOR ', ') AS languages,
     GROUP_CONCAT(DISTINCT rt.racial_type_name ORDER BY rt.racial_type_name ASC SEPARATOR ', ') AS racial_types,
     GROUP_CONCAT(DISTINCT g.gender_type ORDER BY g.gender_type ASC SEPARATOR ', ') AS genders
